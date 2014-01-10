@@ -1,0 +1,33 @@
+# General
+bin
+tmp
+
+# JavaScript Build
+public/css
+public/js
+target/js
+
+# Grunt
+.grunt
+node_modules
+
+# GruntTS
+*.html.ts
+tscommand.tmp.txt
+
+# Bower
+bower_components
+
+# Jasmine
+_SpecRunner.html
+
+# IDE project files
+*.iml
+.idea
+.idea_modules
+.cache
+.classpath
+.project
+.boot
+.target
+

@@ -1,0 +1,19 @@
+{
+  "name": "angular-ts-seed",
+  "version": "0.1.0",
+  "description": "Type-Safe Angular with TypeScript and GruntTS",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeffmay/angular-ts-seed"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-bower": "~0.6.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-jasmine": "~0.5.2",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-watch": "~0.5.2",
+    "grunt-ts": "~1.6.0"
+  }
+}
