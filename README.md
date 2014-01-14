@@ -6,6 +6,8 @@ It takes care of synchronizing your models and your views. All you have to do is
 to do handle DOM manipulation and routes and controllers for handling URL changes and voila, you now have
 a template language that makes your HTML dynamic, testable, and reusable.
 
+This seed project only includes the code responsible for building the app.js resource for the front-end, and
+requires some way to serve the resource (when you no longer want to open the file locally).
 
 Why TypeScript?
 ---------------
@@ -65,16 +67,21 @@ Getting Started
 
 6. Last but not least, you need something to serve your public assets and API endpoints.
 
-    You can use python's `SimpleHTTPServer` module to serve static content.
-
-        $ cd public
-        $ python -m SimpleHTTPServer
-
-Now you should be able to go to http://localhost:8000/index.html and see your application.
+For now, you can just open the [index.html](https://github.com/jeffmay/angular-ts-seed/blob/master/public/index.html)
+file to view your application.
 
 
 Architecture
 ============
+
+About the Code
+--------------
+
+This project makes no prescription about which HTTP Server to use (despite the Play! icon :P). You can plug this
+into any web platform of your choice. The code hints at a strategy of driving the application through events by
+default, rather than round-trips to the database as the default. This is a good performance strategy, but not
+a requirement of this design.
+
 
 Building
 --------
@@ -231,7 +238,8 @@ or just have them run in Phantom with the rest of your test code.
 Shout Outs
 ----------
 
-This project is based off of the GruntTS plugin and workflow ideas put forth by @basarat.
+This project is based off of the wonderful [GruntTS](https://npmjs.org/package/grunt-ts) plugin and
+Angular workflow ideas put forth by @basarat.
 
 Also I highly recommend checking out the [tsd](https://npmjs.org/package/tsd) project for managing your TypeScript
 definition files.

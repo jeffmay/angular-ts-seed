@@ -20,6 +20,7 @@ bower_components
 
 # Jasmine
 _SpecRunner.html
+public/tests.html
 
 # IDE project files
 *.iml

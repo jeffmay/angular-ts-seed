@@ -11,5 +11,3 @@ class NodeUUIDGenerator implements UUIDGenerator {
     return uuid.v4();
   }
 }
-
-services.service("$uuid", NodeUUIDGenerator);
