@@ -147,6 +147,7 @@ declare module ng {
         // following compilation. The observer is then invoked whenever the
         // interpolated value changes.
         $observe(name: string, fn:(value?:any)=>any): Function;
+        $observe(name: string, fn:(value?:any)=>void): Function;
 
         // A map of DOM element attribute names to the normalized name. This is needed
         // to do reverse lookup from normalized name back to actual name.
@@ -283,6 +284,7 @@ declare module ng {
     interface IIntervalService {
         (func: Function, delay: number, count?: number, invokeApply?: boolean): IPromise<any>;
         cancel(promise: IPromise<any>): boolean;
+        flush(millis: number): number;
     }
 
     ///////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-/** Unordered references */
+/** Library references (unordered) */
 /// <reference path="../def/node/node-uuid.d.ts" />
 /// <reference path="../def/jquery/jquery.d.ts" />
 /// <reference path="../def/angular/angular.d.ts" />
@@ -7,21 +7,27 @@
 /** Utility modules */
 /// <reference path="util/assert.ts" />
 
-/** The models package */
-/// <reference path="models/package.ts" />
-/// <reference path="models/CommonModels.ts" />
-/// <reference path="models/UserModels.ts" />
-/// <reference path="models/TaskModels.ts" />
+/** The models package (unordered) */
+/// <reference path="models/base-models.ts" />
+/// <reference path="models/common-models.ts" />
+/// <reference path="models/task-models.ts" />
+/// <reference path="models/user-models.ts" />
 
-/** Unordered / managed references */
+/** Managed references (unordered) */
 //grunt-start
-/// <reference path="templates/tasklist.html.ts" />
-/// <reference path="controllers/TaskControllers.ts" />
-/// <reference path="directives/CommonDirectives.ts" />
-/// <reference path="modules/CommonServices.ts" />
-/// <reference path="modules/Main.ts" />
-/// <reference path="services/UUIDGenerator.ts" />
+/// <reference path="partials/home.html.ts" />
+/// <reference path="partials/tasklist.html.ts" />
+/// <reference path="controllers/task-controllers.ts" />
+/// <reference path="directives/common-directives.ts" />
+/// <reference path="services/uuid-generator.ts" />
 //grunt-end
 
-/** Ordered references */
+/** Angular module dependencies */
+/* (ordered) */
+/// <reference path="modules/all-modules.ts" />
+/* (unordered) */
+/// <reference path="modules/main.ts" />
+/// <reference path="modules/common-services.ts" />
+
+/** Bootstrap application */
 /// <reference path="boot.ts" />

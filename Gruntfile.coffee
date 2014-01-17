@@ -33,6 +33,7 @@ module.exports = (grunt) ->
         module: 'commonjs'
         sourceMap: true
         sourceRoot: '/typescript/app'
+        removeComments: false
       app:
         src: ['public/typescript/app/**/*.ts']
         html: ['public/typescript/app/**/*.html']
@@ -48,7 +49,7 @@ module.exports = (grunt) ->
         src: ['public/typescript/test/**/*.ts']
         html: ['public/typescript/test/**/*.html']
         reference: 'public/typescript/test/reference.ts'
-        out: 'public/js/app/test.js'
+        out: 'public/js/test.js'
         options:
           sourceRoot: ''
           amdloader: 'public/js/loader.js'
@@ -62,7 +63,7 @@ module.exports = (grunt) ->
           # unordered libraries
           'public/js/lib/*'
           # local code
-          'public/js/app/test.js'
+          'public/js/test.js'
         ]
         options:
           outfile: 'public/tests.html'
@@ -72,6 +73,8 @@ module.exports = (grunt) ->
       test:
         files: ['public/typescript/**/*.ts']
         tasks: ['compile-test', 'run-test']
+        options:
+          atBegin: true
 
   grunt.loadNpmTasks 'grunt-bower'
   grunt.loadNpmTasks 'grunt-contrib-clean'
@@ -83,13 +86,13 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'default', ['work']
 
-  grunt.registerTask 'init', ['bower']
+  grunt.registerTask 'init', ['clean', 'bower']
 
   grunt.registerTask 'compile-work', ['ts:app']
   grunt.registerTask 'compile-test', ['ts:test']
 
   grunt.registerTask 'work-and-watch', ['ts:watch']
-  grunt.registerTask 'test-and-watch', ['compile-test', 'run-test', 'watch:test']
+  grunt.registerTask 'test-and-watch', ['watch:test']
 
   grunt.registerTask 'run-test', ['jasmine:test']
 

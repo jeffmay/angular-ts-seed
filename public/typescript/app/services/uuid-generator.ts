@@ -8,6 +8,6 @@ interface UUIDGenerator {
 class NodeUUIDGenerator implements UUIDGenerator {
 
   nextId(): string {
-    return uuid.v4();
+    return uuid.v4()
   }
 }

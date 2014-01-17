@@ -6,9 +6,11 @@
 </head>
 <body>
 
-    <div>Version: <span app-version></span></div>
+    <div>Version: <my-app-version/></div>
 
-    <div>Current Time: <span current-time interval="1000" format="MMMM Do YYYY, h:mm:ss a"></span></div>
+    <div>Current Time: <my-current-time interval="1000" format="M/d/yy h:mm:ss a"/></div>
+
+    <div><a href="#/home">Back to Home</a></div>
 
     <div ng-view></div>
 

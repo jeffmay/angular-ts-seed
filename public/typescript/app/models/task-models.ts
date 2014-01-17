@@ -2,10 +2,10 @@
 
 class Task extends EntityModel {
   constructor(
-    public id: string,
+    id: string,
     public description: string,
     public completed: boolean = false
   ) {
-    super(id);
+    super(id)
   }
 }
