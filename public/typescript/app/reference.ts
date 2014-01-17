@@ -17,7 +17,7 @@
 //grunt-start
 /// <reference path="templates/tasklist.html.ts" />
 /// <reference path="controllers/TaskControllers.ts" />
-/// <reference path="directives/Version.ts" />
+/// <reference path="directives/CommonDirectives.ts" />
 /// <reference path="modules/CommonServices.ts" />
 /// <reference path="modules/Main.ts" />
 /// <reference path="services/UUIDGenerator.ts" />
