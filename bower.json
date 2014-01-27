@@ -1,12 +1,11 @@
 {
-  "name": "righttrack",
+  "name": "angular-ts-seed",
   "dependencies": {
     "angular": "~1.2.8",
     "angular-route": "~1.2.8",
     "node-uuid": "~1.4.1"
   },
   "devDependencies": {
-    "angular-mocks": "~1.2.8",
-    "jasmine.async": "~0.1.0"
+    "angular-mocks": "~1.2.8"
   }
 }

@@ -4,7 +4,6 @@
 /** Testing libraries */
 /// <reference path="../def/angular/angular-mocks.d.ts" />
 /// <reference path="../def/jasmine/jasmine.d.ts" />
-/// <reference path="../def/jasmine/jasmine-async.d.ts" />
 
 /** Unordered dependencies */
 //grunt-start
