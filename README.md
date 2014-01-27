@@ -108,7 +108,7 @@ When you need to add a library, you just need to do the following:
 
         $ bower install --save moar-jquery
 
-3. Then copy it into your App and test libraries:
+3. Then copy the vendor js into your public/lib directory:
 
         $ grunt bower
 
@@ -140,10 +140,15 @@ TypeScript's compiler will concatenate the files in the order of their dependenc
 We can simplify this by creating a single `reference.ts` file with all the files referenced in the order that
 the need to be concatenated in the resulting JavaScript file.
 
-TypeScript also has a way to make external modules if you need to load them asynchronously. To convert your app
-into an AMD module, you can use the [GruntTS](https://github.com/basarat/grunt-ts) plugin to generate an AMD loader.
 If you are working within Angular on the same app, you don't really need to use CommonJS or RequireJS as you can
 just concatenate all your code into a single file (which is a good practice anyhow) and save on the module load time.
+TypeScript also has a way to make external modules if you need to load them asynchronously. You can convert your app
+into an AMD module, you can use the [GruntTS](https://github.com/basarat/grunt-ts) plugin to generate an AMD loader
+as well as the definition file. Then when you want to share code between different modules, you would specify
+separate GruntTS tasks and add the separate code base's definition file to the dependent project's reference file.
+The dependent project's task will kick off the build of the project it depends on, so that you can now import
+the AMD module in your TypeScript code with the type signature generated from all the public code in your
+AngularTS project.
 
 There are other benefits to using file concatenation, such as implicit Angular wiring using modules.
 Checkout this great introductory video that explains the
@@ -188,6 +193,10 @@ To test your application, we concatenate your test code with the rest of your no
 browser to run through all the concatenated test code. You can add src file dependencies (such as your external
 libraries) to the [Gruntfile.coffee](https://github.com/jeffmay/angular-ts-seed/blob/master/Gruntfile.coffee)
 
+You can open any browser to the [test HTML file](https://github.com/jeffmay/angular-ts-seed/blob/master/public/tests.html)
+to drop debugger statements or break points in your code. With a modern browser, you can place breakpoints in your
+typescript code as a source map will be made available to the browser.
+
 Whenever you are writing services, filters, controllers, or directives, it is a good idea to verify that they
 work in a sandbox setting with automated unit tests. Especially if you want these things to stand the test of time!
 
@@ -225,7 +234,7 @@ You should always test your code but sometimes all you need is a basic page with
 Angular built-in tools. In these cases, it will be pretty obvious, as you will probably be doing all your work
 in the HTML.
 
-The only thing you need to verify at this point is that nobody will come and muck up your users' experience.
+The only thing you need to verify at this point is that your users' experience is safe from breaking changes.
 This is where End-To-End (E2E) tests come in. Writing E2E tests will often involve using a Web Driver to click,
 swipe, and type its way through your website and expecting to see some feature work as you would expect it.
 Writing E2E tests helps take you off the hook when some other code (not YOUR code, of course) causes some
