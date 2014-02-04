@@ -53,22 +53,27 @@ Getting Started
         $ npm install
         $ bower install
 
-5. Finally we can compile our project.
+5. Finally we can compile our project and run the tests
 
         # the next line will move all the library code from bower_modules into a publicly accessible place
-        # as well as any other required setup for getting started
+        # as well as compile the code and generate typescript modules from our HTML partials
         $ grunt init
-        # now we can get started
-        $ grunt work
+        # now we should run all our unit tests to verify the build
+        $ grunt test
 
     At this point the terminal will appear to be locked up. It's not. It's just waiting for you to make code changes
     so that it can continuously compile whenever you make a change to the TypeScript source code.
     You can kill it at any time and rerun it without breaking anything.
 
-6. Last but not least, you need something to serve your public assets and API endpoints.
+6. When you want to run the actual project, you will need something to serve your public assets and API endpoints,
+    and then run the grunt work task.
 
-For now, you can just open the [index.html](https://github.com/jeffmay/angular-ts-seed/blob/master/public/index.html)
-file to view your application.
+        $ grunt work
+
+    Again, the task will watch your source files for changes and recompile as you go.
+
+To view the file now, you can just open [index.html](https://github.com/jeffmay/angular-ts-seed/blob/master/public/index.html)
+in your browser to view your seed application.
 
 
 Architecture

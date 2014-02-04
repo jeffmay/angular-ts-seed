@@ -86,7 +86,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'default', ['work']
 
-  grunt.registerTask 'init', ['clean', 'bower']
+  grunt.registerTask 'init', ['clean', 'bower', 'compile-work']
 
   grunt.registerTask 'compile-work', ['ts:app']
   grunt.registerTask 'compile-test', ['ts:test']
