@@ -77,11 +77,13 @@ describe("myCurrentTime directive", () => {
   }))
 
   it("should redraw if the format is updated", inject((dateFilter: DateFilter) => {
-    var scope: any = $scope
+    var scope: any
     compileDirective('<my-current-time format="{{ foo }}"/>')
+    scope = $scope
     scope.foo = 'M/d/yy'
-    scope.$digest()
+    $scope.$digest()
     expect(element.text()).toBe(dateFilter(now, "M/d/yy"))
+    scope = $scope
     scope.foo = 'yy/M/d'
     scope.$digest()
     expect(element.text()).toBe(dateFilter(now, "yy/M/d"))
