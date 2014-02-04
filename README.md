@@ -36,6 +36,9 @@ to code in plain-old JavaScript libraries, as long as this code is available in 
 Getting Started
 ---------------
 
+You might want to watch to also watch this
+[inspirational video on getting setup](http://www.youtube.com/watch?v=P2U2hGTXUaE).
+
 1. First you need to install [Node](https://nodejs.org/) to get the Node Package Manager (NPM).
    (If you are using Mac OSX, I recommend using [Home Brew](http://brew.sh/) to install npm, `brew install node`)
 
