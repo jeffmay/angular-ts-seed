@@ -12,8 +12,8 @@ target/js
 node_modules
 
 # GruntTS
+.tscache
 *.html.ts
-tscommand.tmp.txt
 
 # Bower
 bower_components

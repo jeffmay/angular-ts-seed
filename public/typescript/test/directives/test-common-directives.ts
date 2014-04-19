@@ -58,13 +58,13 @@ describe("myCurrentTime directive", () => {
     expect($scope.currentTime).toBe(previousTime)
     $interval.flush(2000)
     // should have changed
-    expect($scope.currentTime).toNotBe(previousTime)
+    expect($scope.currentTime).not.toBe(previousTime)
     expect(($scope.currentTime).getTime() / 1000).toBeCloseTo(now.getTime() / 1000, 0)
   })
 
   it("should stop the timer after being destroyed", () => {
     compileDirective()
-    spyOn($scope, 'stop').andCallThrough()
+    spyOn($scope, 'stop').and.callThrough()
     $scope.$apply()
     expect($scope.stop).not.toHaveBeenCalled()
     element.remove()

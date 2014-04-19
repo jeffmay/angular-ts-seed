@@ -1,4 +1,4 @@
-// Type definitions for Angular JS 1.0
+// Type definitions for Angular JS 1.2+
 // Project: http://angularjs.org
 // Definitions by: Diego Vilar <http://github.com/diegovilar>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -10,7 +10,7 @@ declare var angular: ng.IAngularStatic;
 
 // Support for painless dependency injection
 interface Function {
-    $inject:string[];
+    $inject?: string[];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ declare module ng {
     ///////////////////////////////////////////////////////////////////////////
     interface IModule {
         animation(name: string, animationFactory: Function): IModule;
-        animation(name: string, inlineAnnotadedFunction: any[]): IModule;
+        animation(name: string, inlineAnnotatedFunction: any[]): IModule;
         animation(object: Object): IModule;
         /** configure existing services.
 		Use this method to register work which needs to be performed on module loading
@@ -88,28 +88,29 @@ declare module ng {
         /** configure existing services.
 		Use this method to register work which needs to be performed on module loading
 		 */
-        config(inlineAnnotadedFunction: any[]): IModule;
+        config(inlineAnnotatedFunction: any[]): IModule;
         constant(name: string, value: any): IModule;
         constant(object: Object): IModule;
         controller(name: string, controllerConstructor: Function): IModule;
-        controller(name: string, inlineAnnotadedConstructor: any[]): IModule;
+        controller(name: string, inlineAnnotatedConstructor: any[]): IModule;
         controller(object : Object): IModule;
         directive(name: string, directiveFactory: Function): IModule;
-        directive(name: string, inlineAnnotadedFunction: any[]): IModule;
+        directive(name: string, inlineAnnotatedFunction: any[]): IModule;
         directive(object: Object): IModule;
         factory(name: string, serviceFactoryFunction: Function): IModule;
-        factory(name: string, inlineAnnotadedFunction: any[]): IModule;
+        factory(name: string, inlineAnnotatedFunction: any[]): IModule;
         factory(object: Object): IModule;
         filter(name: string, filterFactoryFunction: Function): IModule;
-        filter(name: string, inlineAnnotadedFunction: any[]): IModule;
+        filter(name: string, inlineAnnotatedFunction: any[]): IModule;
         filter(object: Object): IModule;
         provider(name: string, serviceProviderConstructor: Function): IModule;
-        provider(name: string, inlineAnnotadedConstructor: any[]): IModule;
+        provider(name: string, inlineAnnotatedConstructor: any[]): IModule;
+        provider(name: string, providerObject: auto.IProvider): IModule;
         provider(object: Object): IModule;
         run(initializationFunction: Function): IModule;
-        run(inlineAnnotadedFunction: any[]): IModule;
+        run(inlineAnnotatedFunction: any[]): IModule;
         service(name: string, serviceConstructor: Function): IModule;
-        service(name: string, inlineAnnotadedConstructor: any[]): IModule;
+        service(name: string, inlineAnnotatedConstructor: any[]): IModule;
         service(object: Object): IModule;
         value(name: string, value: any): IModule;
         value(object: Object): IModule;
@@ -147,7 +148,6 @@ declare module ng {
         // following compilation. The observer is then invoked whenever the
         // interpolated value changes.
         $observe(name: string, fn:(value?:any)=>any): Function;
-        $observe(name: string, fn:(value?:any)=>void): Function;
 
         // A map of DOM element attribute names to the normalized name. This is needed
         // to do reverse lookup from normalized name back to actual name.
@@ -238,7 +238,7 @@ declare module ng {
 
         $parent: IScope;
 
-        $id: number;
+        $id: string;
 
         // Hidden members
         $$isolateBindings: any;
@@ -284,7 +284,6 @@ declare module ng {
     interface IIntervalService {
         (func: Function, delay: number, count?: number, invokeApply?: boolean): IPromise<any>;
         cancel(promise: IPromise<any>): boolean;
-        flush(millis: number): number;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -370,9 +369,18 @@ declare module ng {
     ///////////////////////////////////////////////////////////////////////////
     // ParseService
     // see http://docs.angularjs.org/api/ng.$parse
+    // see http://docs.angularjs.org/api/ng.$parseProvider
     ///////////////////////////////////////////////////////////////////////////
     interface IParseService {
         (expression: string): ICompiledExpression;
+    }
+
+    interface IParseProvider {
+    	logPromiseWarnings(): boolean;
+    	logPromiseWarnings(value: boolean): IParseProvider;
+
+    	unwrapPromises(): boolean;
+    	unwrapPromises(value: boolean): IParseProvider;
     }
 
     interface ICompiledExpression {
@@ -422,7 +430,7 @@ declare module ng {
     // DocumentService
     // see http://docs.angularjs.org/api/ng.$document
     ///////////////////////////////////////////////////////////////////////////
-    interface IDocumentService extends Document {}
+    interface IDocumentService extends IAugmentedJQuery {}
 
     ///////////////////////////////////////////////////////////////////////////
     // ExceptionHandlerService
@@ -444,8 +452,10 @@ declare module ng {
     ///////////////////////////////////////////////////////////////////////////
     interface IQService {
         all(promises: IPromise<any>[]): IPromise<any[]>;
+        all(promises: {[id: string]: IPromise<any>;}): IPromise<{[id: string]: any}>;
         defer<T>(): IDeferred<T>;
         reject(reason?: any): IPromise<void>;
+        when<T>(value: IPromise<T>): IPromise<T>;
         when<T>(value: T): IPromise<T>;
     }
 
@@ -518,9 +528,9 @@ declare module ng {
     // see http://docs.angularjs.org/api/ng.$compileProvider
     ///////////////////////////////////////////////////////////////////////////
     interface ICompileService {
-        (element: string, transclude?: ITemplateLinkingFunction, maxPriority?: number): ITemplateLinkingFunction;
-        (element: Element, transclude?: ITemplateLinkingFunction, maxPriority?: number): ITemplateLinkingFunction;
-        (element: JQuery, transclude?: ITemplateLinkingFunction, maxPriority?: number): ITemplateLinkingFunction;
+        (element: string, transclude?: ITranscludeFunction, maxPriority?: number): ITemplateLinkingFunction;
+        (element: Element, transclude?: ITranscludeFunction, maxPriority?: number): ITemplateLinkingFunction;
+        (element: JQuery, transclude?: ITranscludeFunction, maxPriority?: number): ITemplateLinkingFunction;
     }
 
     interface ICompileProvider extends IServiceProvider {
@@ -530,9 +540,22 @@ declare module ng {
         directive(directivesMap: any): ICompileProvider;
     }
 
-    interface ITemplateLinkingFunction {
+    interface ICloneAttachFunction {
         // Let's hint but not force cloneAttachFn's signature
-        (scope: IScope, cloneAttachFn?: (clonedElement?: JQuery, scope?: IScope) => any): JQuery;
+        (clonedElement?: JQuery, scope?: IScope): any;
+    }
+
+    // This corresponds to the "publicLinkFn" returned by $compile.
+    interface ITemplateLinkingFunction {
+        (scope: IScope, cloneAttachFn?: ICloneAttachFunction): IAugmentedJQuery;
+    }
+
+    // This corresponds to $transclude (and also the transclude function passed to link).
+    interface ITranscludeFunction {
+        // If the scope is provided, then the cloneAttachFn must be as well.
+        (scope: IScope, cloneAttachFn: ICloneAttachFunction): IAugmentedJQuery;
+        // If one argument is provided, then it's assumed to be the cloneAttachFn.
+        (cloneAttachFn?: ICloneAttachFunction): IAugmentedJQuery;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -548,7 +571,7 @@ declare module ng {
 
     interface IControllerProvider extends IServiceProvider {
         register(name: string, controllerConstructor: Function): void;
-        register(name: string, dependencyAnnotadedConstructor: any[]): void;
+        register(name: string, dependencyAnnotatedConstructor: any[]): void;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -720,17 +743,18 @@ declare module ng {
 
     interface IDirective{
         compile?:
-            (templateElement: any,
+            (templateElement: IAugmentedJQuery,
             templateAttributes: IAttributes,
-            transclude: (scope: IScope, cloneLinkingFn: Function) => void
+            transclude: ITranscludeFunction
             ) => any;
         controller?: any;
         controllerAs?: string;
         link?:
             (scope: IScope,
-            instanceElement: any,
+            instanceElement: IAugmentedJQuery,
             instanceAttributes: IAttributes,
-            controller: any
+            controller: any,
+            transclude: ITranscludeFunction
             ) => void;
         name?: string;
         priority?: number;
@@ -776,15 +800,27 @@ declare module ng {
         inheritedData(key: string, value: any): JQuery;
         inheritedData(obj: { [key: string]: any; }): JQuery;
         inheritedData(key?: string): any;
-
-
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    // AnimateService
+    // see http://docs.angularjs.org/api/ng.$animate
+    ///////////////////////////////////////////////////////////////////////
+    interface IAnimateService {
+        addClass(element: JQuery, className: string, done?: Function): void;
+        enter(element: JQuery, parent: JQuery, after: JQuery, done?: Function): void;
+        leave(element: JQuery, done?: Function): void;
+        move(element: JQuery, parent: JQuery, after: JQuery, done?: Function): void;
+        removeClass(element: JQuery, className: string, done?: Function): void;
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // AUTO module (angular.js)
     ///////////////////////////////////////////////////////////////////////////
     export module auto {
+        interface IProvider {
+            $get: any;
+        }
 
         ///////////////////////////////////////////////////////////////////////
         // InjectorService
@@ -792,10 +828,11 @@ declare module ng {
         ///////////////////////////////////////////////////////////////////////
         interface IInjectorService {
             annotate(fn: Function): string[];
-            annotate(inlineAnnotadedFunction: any[]): string[];
-            get (name: string): any;
+            annotate(inlineAnnotatedFunction: any[]): string[];
+            get(name: string): any;
+            has(name: string): boolean; 
             instantiate(typeConstructor: Function, locals?: any): any;
-            invoke(inlineAnnotadedFunction: any[]): any;
+            invoke(inlineAnnotatedFunction: any[]): any;
             invoke(func: Function, context?: any, locals?: any): any;
         }
 
@@ -812,7 +849,7 @@ declare module ng {
             decorator(name: string, decorator: Function): void;
             decorator(name: string, decoratorInline: any[]): void;
             factory(name: string, serviceFactoryFunction: Function): ng.IServiceProvider;
-            factory(name: string, inlineAnnotadedFunction: any[]): ng.IServiceProvider;
+            factory(name: string, inlineAnnotatedFunction: any[]): ng.IServiceProvider;
             provider(name: string, provider: ng.IServiceProvider): ng.IServiceProvider;
             provider(name: string, serviceProviderConstructor: Function): ng.IServiceProvider;
             service(name: string, constructor: Function): ng.IServiceProvider;

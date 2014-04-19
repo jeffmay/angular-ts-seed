@@ -8,15 +8,7 @@ class Model {}
  * The id and created date can never change.
  */
 class EntityModel extends Model {
-  constructor(private _id: string, private _created: Date = new Date()) {
+  constructor(public id: string, public created: Date = new Date()) {
     super()
-  }
-
-  get id() {
-    return this._id
-  }
-
-  get created() {
-    return this._created
   }
 }

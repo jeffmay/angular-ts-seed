@@ -17,7 +17,7 @@ describe("models", () => {
   it ("should convert to json like a plain object", inject(() => {
     var x = new TestEntityModel("id", new TestNestableModel("value"))
     var y = angular.copy(x)
-    expect(x).toEqual(y)
+    expect(angular.equals(x, y)).toBe(true)
   }))
 
 })
