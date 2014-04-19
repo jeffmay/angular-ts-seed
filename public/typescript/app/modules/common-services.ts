@@ -4,7 +4,7 @@ module modules {
 
   export module services {
 
-    common
+    export var common: ng.IModule = angular.module("services.common", [])
       .service("uuid", () => new NodeUUIDGenerator())
 
   }

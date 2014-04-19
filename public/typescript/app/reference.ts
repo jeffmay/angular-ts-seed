@@ -22,12 +22,13 @@
 /// <reference path="services/uuid-generator.ts" />
 //grunt-end
 
-/** Angular module dependencies */
+/** Angular module dependencies
+*
+* Note: These references must be
+*/
 /* (ordered) */
-/// <reference path="modules/all-modules.ts" />
-/* (unordered) */
-/// <reference path="modules/main.ts" />
 /// <reference path="modules/common-services.ts" />
+/// <reference path="modules/main.ts" />
 
 /** Bootstrap application */
 /// <reference path="boot.ts" />
