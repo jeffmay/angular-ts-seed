@@ -1,9 +1,5 @@
-/** Load remaining app references */
+/** Load app references */
 /// <reference path="../app/reference.ts" />
-
-/** Testing libraries */
-/// <reference path="../def/angular/angular-mocks.d.ts" />
-/// <reference path="../def/jasmine/jasmine.d.ts" />
 
 /** Unordered dependencies */
 //grunt-start

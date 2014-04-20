@@ -1,11 +1,11 @@
 // <reference path="../reference.ts"/>
 
-interface UUIDGenerator {
+interface EntityIdGenerator {
 
   nextId(): string
 }
 
-class NodeUUIDGenerator implements UUIDGenerator {
+class NodeUUIDGenerator implements EntityIdGenerator {
 
   nextId(): string {
     return uuid.v4()

@@ -16,7 +16,7 @@ module controllers {
 
   export class TaskListController {
 
-    constructor($scope: any, uuid: UUIDGenerator) {
+    constructor($scope: any, uuid: EntityIdGenerator) {
       $scope.tasks = [
         new Task(uuid.nextId(), "Task A"),
         new Task(uuid.nextId(), "Task B"),

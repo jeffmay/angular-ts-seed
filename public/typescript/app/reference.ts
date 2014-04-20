@@ -1,8 +1,5 @@
-/** Library references (unordered) */
-/// <reference path="../def/node/node-uuid.d.ts" />
-/// <reference path="../def/jquery/jquery.d.ts" />
-/// <reference path="../def/angular/angular.d.ts" />
-/// <reference path="../def/angular/angular-route.d.ts" />
+/** All library references managed through TSD */
+/// <reference path="../typings/tsd.d.ts" />
 
 /** Utility modules */
 /// <reference path="util/assert.ts" />

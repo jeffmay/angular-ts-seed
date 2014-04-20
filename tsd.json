@@ -1,0 +1,27 @@
+{
+  "version": "v4",
+  "repo": "jeffmay/DefinitelyTyped",
+  "ref": "master",
+  "path": "public/typescript/typings",
+  "bundle": "public/typescript/typings/tsd.d.ts",
+  "installed": {
+    "angularjs/angular.d.ts": {
+      "commit": "efec83fc9487e36f716d8e2aa64c34397570e921"
+    },
+    "angularjs/angular-mocks.d.ts": {
+      "commit": "efec83fc9487e36f716d8e2aa64c34397570e921"
+    },
+    "angularjs/angular-route.d.ts": {
+      "commit": "efec83fc9487e36f716d8e2aa64c34397570e921"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "1e03d6b6d29335f210ce91fbd28151b642cfe007"
+    },
+    "jasmine/jasmine.d.ts": {
+      "commit": "1e03d6b6d29335f210ce91fbd28151b642cfe007"
+    },
+    "node-uuid/node-uuid.d.ts": {
+      "commit": "b7da998fdfb244929be5ceab8646f5f12ebc3dfa"
+    }
+  }
+}
